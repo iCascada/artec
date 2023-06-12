@@ -61,7 +61,7 @@ class TicketServiceDefault implements TicketServiceInterface
 
         return collect($this->request->reportIds)->reduce(
             function (?int $accum, int $reportId, int $index) use ($itemCost) {
-                if ($index % 2) {
+                if (($index % 2) === 0) {
                     return $accum + $itemCost + 100;
                 }
 
