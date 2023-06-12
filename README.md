@@ -2,7 +2,7 @@
 ---
 Для запуска на локальной машине нужен docker и docker-compose последней версии.
 Разворачивание осуществляется командой ниже. <br/>
-Понадобятся порты 8806, 8880. <br/>
+Понадобятся порты 8806, 8880. (или поправить под себя файлик docker-compose <code>/_docker_/docker-compose.yml</code>) <br/>
 
 ```shell
 cd ./_docker_/ && docker-compose up -d \
