@@ -1,0 +1,201 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Artec API",
+        "version": "0.0.1"
+    },
+    "paths": {
+        "/api/order": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get payed tickets",
+                "description": "Прототип получения заказа<br>\n    <b>Allowed values:</b><br>\n    <p>ids: array<'int'></p>\n    ",
+                "operationId": "259c9cd473c55293f05ea80dd9832b36",
+                "parameters": [
+                    {
+                        "name": "ids[]",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            }
+                        },
+                        "example": [
+                            3,
+                            4
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "total": 1395,
+                                    "tickets": [
+                                        {
+                                            "Eligendi.": 919
+                                        },
+                                        {
+                                            "Non et.": 476
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation errors",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "error": "The ids field is required."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cost": {
+            "get": {
+                "tags": [
+                    "Ticket"
+                ],
+                "summary": "Get ticket cost",
+                "description": "Прототип расчета стоимости каждого конкретного билета<br>\n            <b>Allowed values:</b><br>\n            <p>type: Enum<'offline','online'></p>\n            <p>ticketId: int</p>\n            <p>reportIds: array<'int'></p>\n            <p>tariff: string, <b>Not implemented</b></p>\n    ",
+                "operationId": "844d33766e02ace68ded376091712d25",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "offline"
+                    },
+                    {
+                        "name": "ticketId",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 45
+                    },
+                    {
+                        "name": "tariff",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "reportIds",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "cost": 33000
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation errors",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "error": "The ticket id field is required."
+                                }
+                            }
+                        }
+                    },
+                    "501": {
+                        "description": "Not implemented",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "error": "Tariff's is not supported yet."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/pay": {
+            "post": {
+                "tags": [
+                    "Ticket"
+                ],
+                "summary": "Pay ticket",
+                "description": "Прототип оплаты билета<br>\n            <b>Allowed values:</b><br>\n            <p>type: Enum<'offline','online'></p>\n            <p>ticketId: int</p>\n            <p>reportIds: array<'int'></p>\n            <p>tariff: string, <b>Not implemented</b></p>\n    ",
+                "operationId": "881171b8a88b2e184c2f553b76cba25a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {},
+                            "example": {
+                                "type": "offline",
+                                "ticketId": "45"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "422": {
+                        "description": "Validation errors",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "error": "The ticket id field is required."
+                                }
+                            }
+                        }
+                    },
+                    "501": {
+                        "description": "Not implemented",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "error": "Tariff's is not supported yet."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
